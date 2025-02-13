@@ -66,6 +66,7 @@ contract Auction {
     function winnerSelection(uint256 bidId) external {
         uint256 highestBid = 0;
         address payable winner;
+
         for (uint256 i = 0; i < eachBidDetails.length; i++) {
             if (eachBidDetails[i].amount > highestBid) {
                 highestBid = eachBidDetails[i].amount;
@@ -73,9 +74,13 @@ contract Auction {
             }
         }
         require(winner != address(0), "No valid bids found");
-        auction[bidId].auctioneer.transfer(highestBid);
-        
-    }
 
-    
+        auction[bidId].auctioneer.transfer(highestBid);
+
+        for (uint256 i = 0; i < eachBidDetails.length; i++) {
+            if (eachBidDetails[i].bidder != winner) {
+                eachBidDetails[i].bidder.transfer(eachBidDetails[i].amount);
+            }
+        }
+    }
 }
