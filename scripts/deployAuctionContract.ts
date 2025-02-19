@@ -1,8 +1,8 @@
 import { ethers } from "hardhat";
-import {
-    time,
-    loadFixture,
-  } from "@nomicfoundation/hardhat-toolbox/network-helpers";
+// import {
+//     time,
+//     loadFixture,
+//   } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 
 async function main() {
     const Auction = await ethers.getContractFactory("Auction");
@@ -12,11 +12,11 @@ async function main() {
     const ONE_Hour_SECS = 1 * 60 * 60;
     
 
-    const duration = (await time.latest()) + ONE_Hour_SECS;
+    const duration = 10;
 
-    const startPrice = await ethers.parseEther("2");
-    const endPrice = await ethers.parseEther("1");
-    const startTime = await time.latest();
+    const startPrice =  ethers.parseEther("2");
+    const endPrice =  ethers.parseEther("1");
+    const startTime = 10;
 
     // Deploy Auction contract
     const auction = await Auction.deploy(TokenAddress1, TokenAddress2, startPrice, endPrice, startTime, duration);

@@ -13,24 +13,14 @@ async function main() {
     deployer.address
   );
 
-  const auctionAddress = "0x8Db44D92391A5F7Ec35fD075cEBdE8569C9e6E39"; // Replace with deployed Auction contract address
+  const auctionAddress = "0x51395038D74bC0E08b3A9cfDd226Ae1d0164f26A"; 
   const auction = await ethers.getContractAt("IAuction", auctionAddress);
 
-//   const auction = Auction.attach(auctionAddress);
 
-  // Check if the address has already committed a bid
-//   const commitment = await auction.commitments(deployer.address);
-//   if (
-//     commitment.hash !==
-//     "0x0000000000000000000000000000000000000000000000000000000000000000"
-//   ) {
-//     console.log("Bid already committed for this address.");
-//     return;
-//   }
 
   // Interactions
   // Create an auction
-  const endTime = Math.floor(Date.now() / 1000) + 60; // Auction ends in 1 minute
+  const endTime = Math.floor(Date.now() / 1000) + 60; 
 
   const createAuctionTx = await auction.createAuction(
     "ItemX",
@@ -54,7 +44,7 @@ async function main() {
     ["uint256", "uint256"],
     [bidAmount, salt]
   );
-  const tokenAddress = "0x527dF04B96b1FFF91A1914C0987900d9d8c60996"; // Replace with ERC20 token contract address
+  const tokenAddress = ""; // Replace with ERC20 token contract address
   const token = await ethers.getContractAt("ERC20", tokenAddress);
 
   console.log("Approving tokens...");
